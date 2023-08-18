@@ -1,0 +1,65 @@
+.header {
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
+    align-items: center;
+    background-color: #fff;
+    padding: 1em;
+    &__logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &--img {
+            height: 100px;
+        }
+    }
+    &__menu {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &--item {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 150%;
+            color: #292929;
+            text-decoration: none;
+        }
+        /* 21px */
+    }
+    &__account {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        :hover {
+            cursor: pointer;
+        }
+        &--img {
+            position: relative;
+        }
+    }
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    width: 200px;
+    
+    top: 40px;
+    right: -40px;
+    background-color: white;
+    padding: 10px;
+
+    &__item {
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+.header.open {
+    .dropdown {
+        display: block;
+    }
+}

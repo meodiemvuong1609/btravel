@@ -1,0 +1,17 @@
+@import './base.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+#app {
+  height: 100vh;
+  margin: 0 auto;
+  /* padding: 1em; */
+  font-weight: normal;
+
+}
+body {
+  background-color: #F5F5F5;
+  font-weight: normal;
+}
