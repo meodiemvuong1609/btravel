@@ -4,14 +4,6 @@
     align-items: center;
     background-color: #fff;
     padding: 1em;
-    &__logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &--img {
-            height: 100px;
-        }
-    }
     &__menu {
         display: flex;
         justify-content: space-between;

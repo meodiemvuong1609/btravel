@@ -50,7 +50,7 @@ export default {
                 this.loading = false
                 localStorage.setItem('token', response.data.data.token)
                 localStorage.setItem('user', JSON.stringify(response.data.data.user))
-                // this.$router.push('/')
+                this.$router.push('/')
             } else {
                 this.message = 'Đăng nhập thất bại'
                 this.loading = false
