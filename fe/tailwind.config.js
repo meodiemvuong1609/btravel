@@ -59,9 +59,6 @@ module.exports = {
         6: '48px',
         7: '60px',
       },
-      // backgroundImage: {
-      //   'bg-home-page': "url('/img/hero-pattern.svg')",
-      // },
     },
     borderRadius: {
       none: '0',

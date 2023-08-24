@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center">
-    <div class="flex gap-3 w-3/4 h-3/4 ">
-      <div v-for="(status, index) in statusOrder" :key="index" class="flex items-center bg-gray rounded-lg cursor-pointer px-4 py-2">
+    <div class="flex gap-3 w-3/4 min-w-max ">
+      <div v-for="(status, index) in statusOrder" :key="index" class="flex items-center bg-gray rounded-lg cursor-pointer p-3">
         {{status.title}}
       </div>
     </div>
@@ -22,6 +22,7 @@ export default {
 
     }
   },
+
 
 }
 </script>

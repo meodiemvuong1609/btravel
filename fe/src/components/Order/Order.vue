@@ -3,14 +3,14 @@
       <div class="header w-full my-8">
         <div class="header__top w-full p-4 bg-white rounded-lg">
           <div class="top flex justify-between pb-5">
-            <input type="text" class="w-1/3 flex p-3 rounded-lg bg-white border-2 border-#E2E2E2" placeholder="Tìm kiếm theo mã đơn hàng">
-            <button class="w-1/6 rounded-lg bg-red-dark-1 p-3 md:p-4 font-medium text-white">Tạo đơn hàng</button>
+            <input type="text" class="w-1/4 h-8 items-center flex p-3 rounded-lg bg-white border-2 border-#E2E2E2" placeholder="Tìm kiếm theo mã đơn hàng">
+            <button class="flex w-1/6 h-8 justify-center text-sm rounded-lg bg-red-dark-1 p-3 font-medium text-white">Tạo đơn hàng</button>
           </div>
           <div class="bot flex justify-between">
             <status-order :statusOrder="statusOrder"></status-order>
   
             <div class="select w-1/6">
-              <button class="rounded-lg bg-white p-3 md:p-4 font-medium text-black border-2 border-#E2E2E2 w-full">Chọn loại đối tác mua</button>
+              <button class="rounded-lg bg-white p-3 font-medium text-sm text-black border-2 border-#E2E2E2 w-full">Chọn loại đối tác mua</button>
             </div>
           </div>
         </div>
@@ -25,50 +25,24 @@
           <div class="w-1/7 text-center">Tổng tiền</div>
           <div class="w-1/7 text-center">Trạng thái</div>
         </div>
-            <!-- Table rows -->
         <div class="table__rows">
-          <div class="grid grid-cols-7 p-2 font-bold w-full justify-between gap-11 py-4 px-6 bg-white rounded-lg my-2">
-          <div class="w-1/7 text-center">DH001</div>
-          <div class="w-1/7 text-center">ABC Corp</div>
-          <div class="w-1/7 text-center">XYZ Supplier</div>
-          <div class="w-1/7 text-center">0123456789</div>
-          <div class="w-1/7 text-center">123 Street</div>
-          <div class="w-1/7 text-center">$100.00</div>
-          <div class="w-1/7 text-center">In progress</div>
-        </div>
-        <div class="grid grid-cols-7 p-2 font-bold w-full justify-between gap-11 py-4 px-6 bg-white rounded-lg my-2">
-          <div class="w-1/7 text-center">DH001</div>
-          <div class="w-1/7 text-center">ABC Corp</div>
-          <div class="w-1/7 text-center">XYZ Supplier</div>
-          <div class="w-1/7 text-center">0123456789</div>
-          <div class="w-1/7 text-center">123 Street</div>
-          <div class="w-1/7 text-center">$100.00</div>
-          <div class="w-1/7 text-center">In progress</div>
-        </div>
-        <div class="grid grid-cols-7 p-2 font-bold w-full justify-between gap-11 py-4 px-6 bg-white rounded-lg my-2">
-          <div class="w-1/7 text-center">DH001</div>
-          <div class="w-1/7 text-center">ABC Corp</div>
-          <div class="w-1/7 text-center">XYZ Supplier</div>
-          <div class="w-1/7 text-center">0123456789</div>
-          <div class="w-1/7 text-center">123 Street</div>
-          <div class="w-1/7 text-center">$100.00</div>
-          <div class="w-1/7 text-center">In progress</div>
-        </div>
-        <div class="grid grid-cols-7 p-2 font-bold w-full justify-between gap-11 py-4 px-6 bg-white rounded-lg my-2">
-          <div class="w-1/7 text-center">DH001</div>
-          <div class="w-1/7 text-center">ABC Corp</div>
-          <div class="w-1/7 text-center">XYZ Supplier</div>
-          <div class="w-1/7 text-center">0123456789</div>
-          <div class="w-1/7 text-center">123 Street</div>
-          <div class="w-1/7 text-center">$100.00</div>
-          <div class="w-1/7 text-center">In progress</div>
+          <div v-for="(item, index) in order" :key="index" class="grid grid-cols-7 p-2 font-bold w-full justify-between py-4 px-6 bg-white rounded-lg my-2">
+            <div class="w-1/7 text-center">{{item.code}}</div>
+            <div class="w-1/7 text-center">{{item.account_buy_data.key_account}}</div>
+            <div class="w-1/7 text-center">{{item.account_sell_data.system_data.code}}</div>
+            <div class="w-1/7 text-center">{{item.account_buy_data.phone}}</div>
+            <div class="w-1/7 text-center">{{item.account_buy_data.address_data.title}}</div>
+            <div class="w-1/7 text-center">{{item.total}}</div>
+            <div class="w-1/7 text-center">{{item.status_data.title}}</div>
+
+          </div>
         </div>
         </div>
         
 
       </div>
     
-  </div>
+
 </template>
 
 <script>
@@ -79,16 +53,27 @@ export default {
   name: 'Order',
   data() {
     return {
-      statusOrder: []
+      statusOrder: [],
+      order: []
     }
   },
 
   methods: {
     async getStatusOrder() {
       try {
-        const response = await HTTP.get('account/api/gender/')
+        const response = await HTTP.get('order/api/statusordersystem/')
         if (response.status === 200) {
           this.statusOrder = response.data.data
+        }
+        } catch (error) {
+          console.log(error)
+      }
+    },
+    async getListOrder() {
+      try {
+        const response = await HTTP.get('order/api/ordersystem/')
+        if (response.status === 200) {
+          this.order = response.data.data
         }
         } catch (error) {
           console.log(error)
@@ -96,7 +81,8 @@ export default {
     }
   },
   mounted() {
-    this.getStatusOrder()
+    this.getStatusOrder(),
+    this.getListOrder()
   }
 }
 

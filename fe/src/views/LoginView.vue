@@ -23,8 +23,12 @@
 
 <script>
 import HTTP from '@/HTTP/HTTP.js'
+import Popup from '@/components/Popup/Popup.vue'
 export default {
     name: 'LoginView',
+    components: {
+        Popup
+    },
     data () {
         return {
             phone: '',
@@ -43,7 +47,8 @@ export default {
             this.loading = true
             let response = await HTTP.post('/account/api/login/', {
                 phone: this.phone,
-                password: this.password
+                password: this.password,
+                system_code: "ADMIN"
             })
             if (response.status === 200) {
                 this.message = 'Đăng nhập thành công'
